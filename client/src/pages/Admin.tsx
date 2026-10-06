@@ -66,11 +66,19 @@ export default function Admin() {
 
   if (me.isLoading) {
     return (
-      <LedgerSection numeral="12" label="Admin">
-        <p role="status" aria-live="polite" className="text-ink-soft">
-          Checking your session…
-        </p>
-      </LedgerSection>
+      <>
+        <PageHeader
+          numeral="12"
+          eyebrow="Admin review"
+          title="Review queue"
+          lede="Roster applications and sponsor inquiries, with status transitions and internal notes."
+        />
+        <LedgerSection numeral="01" label="Session">
+          <p role="status" aria-live="polite" className="text-ink-soft">
+            Checking your session…
+          </p>
+        </LedgerSection>
+      </>
     );
   }
 

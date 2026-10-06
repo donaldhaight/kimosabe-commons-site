@@ -13,6 +13,7 @@ export function Field({
   required,
   children,
   className,
+  fieldId,
 }: {
   label: string;
   hint?: string;
@@ -20,8 +21,13 @@ export function Field({
   required?: boolean;
   children: (props: { id: string; describedBy?: string; invalid: boolean }) => ReactNode;
   className?: string;
+  /**
+   * A stable id for the control. Callers that need to move focus to the first
+   * invalid control pass one, so the generated counter id is never depended on.
+   */
+  fieldId?: string;
 }) {
-  const id = `field-${(fieldCounter += 1)}`;
+  const id = fieldId ?? `field-${(fieldCounter += 1)}`;
   const hintId = hint ? `${id}-hint` : undefined;
   const errorId = error ? `${id}-error` : undefined;
   const describedBy = [hintId, errorId].filter(Boolean).join(" ") || undefined;

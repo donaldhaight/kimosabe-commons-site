@@ -3,6 +3,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import Seo from "./components/Seo";
+import { SiteFooter, SiteHeader } from "./components/SiteChrome";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Admin from "./pages/Admin";
 import Apply from "./pages/Apply";
@@ -26,24 +27,29 @@ function Router() {
   return (
     <>
       <Seo path={location} />
-      <Switch>
-        <Route path="/" component={Home} />
-        <Route path="/how-it-works" component={HowItWorks} />
-        <Route path="/programs" component={Programs} />
-        <Route path="/participate" component={Participate} />
-        <Route path="/who-we-serve" component={WhoWeServe} />
-        <Route path="/governance" component={Governance} />
-        <Route path="/benefit-report" component={BenefitReport} />
-        <Route path="/territories" component={Territories} />
-        <Route path="/territories/:state" component={TerritoryDetail} />
-        <Route path="/apply" component={Apply} />
-        <Route path="/sponsor" component={Sponsor} />
-        <Route path="/resources" component={Resources} />
-        <Route path="/contact" component={Contact} />
-        <Route path="/admin" component={Admin} />
-        <Route path="/404" component={NotFound} />
-        <Route component={NotFound} />
-      </Switch>
+      <div className="flex min-h-screen flex-col">
+        <SiteHeader />
+        <main id="main" className="flex-1">
+          <Switch>
+            <Route path="/" component={Home} />
+            <Route path="/how-it-works" component={HowItWorks} />
+            <Route path="/programs" component={Programs} />
+            <Route path="/participate" component={Participate} />
+            <Route path="/who-we-serve" component={WhoWeServe} />
+            <Route path="/governance" component={Governance} />
+            <Route path="/benefit-report" component={BenefitReport} />
+            <Route path="/territories" component={Territories} />
+            <Route path="/territories/:state" component={TerritoryDetail} />
+            <Route path="/apply" component={Apply} />
+            <Route path="/sponsor" component={Sponsor} />
+            <Route path="/resources" component={Resources} />
+            <Route path="/contact" component={Contact} />
+            <Route path="/admin" component={Admin} />
+            <Route component={NotFound} />
+          </Switch>
+        </main>
+        <SiteFooter />
+      </div>
     </>
   );
 }

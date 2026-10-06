@@ -45,7 +45,7 @@ export default function Home() {
             </div>
             <div className="ledger-field">
               <p className="data text-[0.75rem] tracking-[0.2em] text-field uppercase">
-                A public benefit corporation
+                A proposed Delaware public benefit corporation
               </p>
               <h1 className="measure-wide mt-4">
                 Every address is a stakeholder. Every stakeholder gets a job.

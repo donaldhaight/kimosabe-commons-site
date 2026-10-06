@@ -100,7 +100,6 @@ export function LedgerSection({
     <section
       id={id}
       className={cn("border-b border-border py-12 sm:py-16", toneClass, className)}
-      aria-labelledby={id ? `${id}-heading` : undefined}
     >
       <div className="container">
         <div className="ledger-grid">

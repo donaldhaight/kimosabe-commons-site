@@ -64,7 +64,11 @@ export default function Sponsor() {
       next.email = "Please enter a valid email address.";
     if (!form.consent) next.consent = "We need your consent to follow up.";
     setErrors(next);
-    if (Object.keys(next).length > 0) return;
+    const firstKey = Object.keys(next)[0];
+    if (firstKey) {
+      document.getElementById(`field-${firstKey}`)?.focus();
+      return;
+    }
 
     mutation.mutate({
       organization: form.organization.trim(),
@@ -208,7 +212,7 @@ export default function Sponsor() {
         <form onSubmit={onSubmit} noValidate className="measure-wide">
           <div className="grid gap-6">
             <div className="grid gap-6 sm:grid-cols-2">
-              <Field label="Organisation" required error={errors.organization}>
+              <Field label="Organisation" required error={errors.organization} fieldId="organization">
                 {props => (
                   <TextInput
                     {...props}
@@ -219,7 +223,7 @@ export default function Sponsor() {
                   />
                 )}
               </Field>
-              <Field label="Contact name" required error={errors.contactName}>
+              <Field label="Contact name" required error={errors.contactName} fieldId="contactName">
                 {props => (
                   <TextInput
                     {...props}
@@ -233,7 +237,7 @@ export default function Sponsor() {
             </div>
 
             <div className="grid gap-6 sm:grid-cols-2">
-              <Field label="Email" required error={errors.email}>
+              <Field label="Email" required error={errors.email} fieldId="email">
                 {props => (
                   <TextInput
                     {...props}
@@ -347,7 +351,7 @@ export default function Sponsor() {
               )}
             </Field>
 
-            <Field label="Consent" required error={errors.consent}>
+            <Field label="Consent" required error={errors.consent} fieldId="consent">
               {props => (
                 <ConsentBox {...props} checked={form.consent} onChange={value => update("consent", value)}>
                   I agree that Kimosabe Commons may store and review this inquiry and contact me about

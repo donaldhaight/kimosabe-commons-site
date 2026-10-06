@@ -242,16 +242,3 @@ export function SiteFooter() {
     </footer>
   );
 }
-
-export function Page({ children, path }: { children: React.ReactNode; path: string }) {
-  void path;
-  return (
-    <div className="flex min-h-screen flex-col">
-      <SiteHeader />
-      <main id="main" className="flex-1">
-        {children}
-      </main>
-      <SiteFooter />
-    </div>
-  );
-}

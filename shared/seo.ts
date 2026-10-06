@@ -29,10 +29,10 @@ export const ROUTES: RouteMeta[] = [
     path: "/",
     title: "Kimosabe Commons — The Recruiting Layer for a Verified Map",
     description:
-      "A public benefit corporation building the recruiting, promotion and stewardship layer for the Human Blockchain: a verified roster of people and addresses.",
+      "A proposed Delaware public benefit corporation building the recruiting, promotion and stewardship layer for the Human Blockchain: a verified roster of people and addresses.",
     heading: "Every address is a stakeholder. Every stakeholder gets a job.",
     summary: [
-      "Kimosabe Commons, PBC is a public benefit corporation that builds the recruiting, promotion and stewardship layer for the Human Blockchain. It turns a map of people and addresses into a verified roster: who is licensed, who owns the claim, who can act, what territory they hold, and what they completed this season.",
+      "Kimosabe Commons, PBC is a proposed Delaware public benefit corporation. Its purpose is to build the recruiting, promotion and stewardship layer for the Human Blockchain, turning a map of people and addresses into a verified roster: who is licensed, who owns the claim, who can act, what territory they hold, and what they completed this season.",
       "The company runs four programs — recruiting and roster operations, promotion and campaign production, territory stewardship, and attestation and verification — on a five-phase seasonal clock of pre-season, season, cool-down, dispute resolution and reset.",
       "Participation is described as sponsorship or participation. Kimosabe Commons does not offer investments, does not sell tokens, and is not an insurer, adjuster, escrow agent or money transmitter.",
     ],
@@ -94,7 +94,7 @@ export const ROUTES: RouteMeta[] = [
       "The chartered public benefit of Kimosabe Commons, PBC, how the board is constituted, how benefits are measured and published, and how conflicts are handled.",
     heading: "A chartered benefit, measured and published",
     summary: [
-      "Kimosabe Commons is organised as a public benefit corporation. Its chartered benefit is increasing the number of verified, address-anchored, lawfully organised participants who can convert a documented community Need into a documented, evidenced Done.",
+      "Kimosabe Commons is proposed as a Delaware public benefit corporation. Its intended chartered benefit is increasing the number of verified, address-anchored, lawfully organised participants who can convert a documented community Need into a documented, evidenced Done.",
       "That benefit is measured as verified stakeholder activations, evidenced completions and retained participation per territory per season, and published in an annual benefit report. Governance, conflict-of-interest rules and the boundary between this company and the founder's other interests are stated publicly.",
     ],
     indexable: true,

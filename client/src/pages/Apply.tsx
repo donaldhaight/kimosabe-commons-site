@@ -95,14 +95,15 @@ export default function Apply() {
     if (!form.countySlug) next.countySlug = "Select the county, or the nearest one to your area.";
     if (!form.consent) next.consent = "We need your consent to review the application.";
     setErrors(next);
-    return Object.keys(next).length === 0;
+    return next;
   };
 
   const onSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    if (!validate()) {
-      const firstKey = Object.keys(errors)[0];
-      if (firstKey) document.getElementById(`field-${firstKey}`)?.focus();
+    const next = validate();
+    const firstKey = Object.keys(next)[0];
+    if (firstKey) {
+      document.getElementById(`field-${firstKey}`)?.focus();
       return;
     }
     const county = countiesForState.find(c => c.slug === form.countySlug);
@@ -235,7 +236,7 @@ export default function Apply() {
             </Field>
 
             <div className="grid gap-6 sm:grid-cols-2">
-              <Field label="Full name" required error={errors.fullName}>
+              <Field label="Full name" required error={errors.fullName} fieldId="fullName">
                 {props => (
                   <TextInput
                     {...props}
@@ -246,7 +247,7 @@ export default function Apply() {
                   />
                 )}
               </Field>
-              <Field label="Email" required error={errors.email}>
+              <Field label="Email" required error={errors.email} fieldId="email">
                 {props => (
                   <TextInput
                     {...props}
@@ -298,7 +299,12 @@ export default function Apply() {
             </Field>
 
             <div className="grid gap-6 sm:grid-cols-2">
-              <Field label="State you intend to work in" required error={errors.stateCode}>
+              <Field
+                label="State you intend to work in"
+                required
+                error={errors.stateCode}
+                fieldId="stateCode"
+              >
                 {props => (
                   <Select
                     {...props}
@@ -321,6 +327,7 @@ export default function Apply() {
                 label="County"
                 required
                 error={errors.countySlug}
+                fieldId="countySlug"
                 hint="Sample counties are listed. If yours is missing, choose the nearest and name it in the note."
               >
                 {props => (
@@ -390,7 +397,7 @@ export default function Apply() {
               )}
             </Field>
 
-            <Field label="Consent" required error={errors.consent}>
+            <Field label="Consent" required error={errors.consent} fieldId="consent">
               {props => (
                 <ConsentBox
                   {...props}
