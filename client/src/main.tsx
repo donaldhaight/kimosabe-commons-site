@@ -72,7 +72,14 @@ const trpcClient = trpc.createClient({
   ],
 });
 
-createRoot(document.getElementById("root")!).render(
+const container = document.getElementById("root")!;
+
+// The server injects a readable pre-hydration content block inside #root for
+// crawlers and slow connections. Remove it before the application mounts so the
+// initial render owns the container cleanly.
+container.querySelector(".kc-fallback")?.remove();
+
+createRoot(container).render(
   <trpc.Provider client={trpcClient} queryClient={queryClient}>
     <QueryClientProvider client={queryClient}>
       <App />

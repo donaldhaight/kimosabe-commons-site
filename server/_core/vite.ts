@@ -5,6 +5,7 @@ import { nanoid } from "nanoid";
 import path from "path";
 import { createServer as createViteServer } from "vite";
 import viteConfig from "../../vite.config";
+import { injectSeo, isHtmlRequest, requestPath } from "../seo";
 
 export async function setupVite(app: Express, server: Server) {
   const serverOptions = {
@@ -25,6 +26,10 @@ export async function setupVite(app: Express, server: Server) {
     const url = req.originalUrl;
 
     try {
+      // Non-document requests are not ours to answer: public assets and anything
+      // else must fall through rather than receive the application shell.
+      if (!isHtmlRequest(req)) return next();
+
       const clientTemplate = path.resolve(
         import.meta.dirname,
         "../..",
@@ -38,8 +43,14 @@ export async function setupVite(app: Express, server: Server) {
         `src="/src/main.tsx"`,
         `src="/src/main.tsx?v=${nanoid()}"`
       );
-      const page = await vite.transformIndexHtml(url, template);
-      res.status(200).set({ "Content-Type": "text/html" }).end(page);
+      let page = await vite.transformIndexHtml(url, template);
+
+      // Route-specific head metadata and a crawler-readable body block.
+      const injected = injectSeo(page, requestPath(req));
+      page = injected.html;
+      const status = injected.status;
+
+      res.status(status).set({ "Content-Type": "text/html" }).end(page);
     } catch (e) {
       vite.ssrFixStacktrace(e as Error);
       next(e);
@@ -60,8 +71,31 @@ export function serveStatic(app: Express) {
 
   app.use(express.static(distPath));
 
-  // fall through to index.html if the file doesn't exist
+  // Fall through to the application shell for document requests, injecting
+  // route-specific metadata and crawler-readable content. Unknown routes keep a
+  // real 404 status while still letting the client render its not-found page.
+  const indexPath = path.resolve(distPath, "index.html");
+  let cached: { html: string; mtimeMs: number } | null = null;
+
+  const readShell = (): string => {
+    const stat = fs.statSync(indexPath);
+    if (!cached || cached.mtimeMs !== stat.mtimeMs) {
+      cached = { html: fs.readFileSync(indexPath, "utf-8"), mtimeMs: stat.mtimeMs };
+    }
+    return cached.html;
+  };
+
+  app.use((req, res, next) => {
+    if (!isHtmlRequest(req)) return next();
+    try {
+      const { html, status } = injectSeo(readShell(), requestPath(req));
+      res.status(status).set({ "Content-Type": "text/html; charset=utf-8" }).end(html);
+    } catch (error) {
+      next(error);
+    }
+  });
+
   app.use("*", (_req, res) => {
-    res.sendFile(path.resolve(distPath, "index.html"));
+    res.sendFile(indexPath);
   });
 }

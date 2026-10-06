@@ -1,0 +1,18 @@
+{
+  "routes": [
+    { "path": "/", "title": "Kimosabe Commons — The Recruiting Layer for a Verified Map" },
+    { "path": "/how-it-works", "title": "How It Works — Discovery to Retained Participation" },
+    { "path": "/programs", "title": "Programs — Recruiting, Promotion, Stewardship, Attestation" },
+    { "path": "/participate", "title": "Participate — Season 1 Participation and Sponsorship Tiers" },
+    { "path": "/who-we-serve", "title": "Who We Serve — Contractors, Sponsors, Counties, Builders" },
+    { "path": "/governance", "title": "Governance and Public Benefit — Kimosabe Commons, PBC" },
+    { "path": "/benefit-report", "title": "Benefit Report — Published Seasonal Metrics" },
+    { "path": "/territories", "title": "Territories — Browse County Availability for Season 1" },
+    { "path": "/territories/:state", "title": "Territory Detail" },
+    { "path": "/apply", "title": "Apply — Join the Season 1 Roster" },
+    { "path": "/sponsor", "title": "Sponsor Inquiry — Fund a Season in a Territory" },
+    { "path": "/resources", "title": "Resources — Research and the Ecosystem Knowledge Bundle" },
+    { "path": "/contact", "title": "Contact Kimosabe Commons, PBC" },
+    { "path": "/admin", "title": "Admin Review — Kimosabe Commons" }
+  ]
+}
